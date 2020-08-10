@@ -5,13 +5,21 @@ from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.models import User
 from .models import address,seller,product
 
+def handle_uploaded_file(f):
+    with open('some/file/name.txt', 'wb+') as destination:
+        for chunk in f.chunks():
+            destination.write(chunk)
+
 class addproductform(ModelForm):
 	class Meta:
 		model=product
 		fields=['name','price','image','category','delivery_charges']
-	def save(self,user1):
-		sel=seller.objects.get(user=user1)
-		prod=product.objects.create(seller=sel,name=self.fields['name'],price=str(self.fields['price'].value()),category=self.fields['category'],delivery_charges=self.fields['delivery_charges'])
+	def save(self,request):
+		sel=seller.objects.get(user=request.user)
+		pr=float(self.cleaned_data.get('price'))
+		dc=float(self.cleaned_data.get('delivery_charges'))
+		img=request.FILES['image']
+		prod=product(seller=sel,image=img,name=str(self.cleaned_data.get('name')),price=pr,category=self.cleaned_data.get('category'),delivery_charges=dc)
 		prod.save()
 		return prod
 

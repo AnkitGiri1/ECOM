@@ -11,7 +11,7 @@ def addproduct(request):
 	if request.method=='POST':
 		form=addproductform(request.POST,request.FILES)
 		if form.is_valid():
-			form.save(request.user)
+			form.save(request)
 			return HttpResponseRedirect('/seller_dashboard')
 		else:
 			is_seller=seller.objects.filter(user=request.user)
