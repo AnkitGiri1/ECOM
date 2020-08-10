@@ -1,0 +1,26 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div id="logreg-forms">
+	<form class="form-signup" method="POST" action="">
+		{% csrf_token %}
+		<h1 class="h3 mb-3 font-weight-normal" style="text-align: center"> Sign UP</h1>
+		<div class="inputcontainer">
+			{% for field in form %}
+				{{ field.label }}
+				{{ field }}
+				{{ field.errors}}
+			{% endfor %}
+		</div>
+		<button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i> Sign UP</button>
+		<hr>
+		Already have an account!<a style="display: inline; " href="{% url 'login'%}"> Login</a>
+		</form>
+	</div>
+	<script >
+		$("div input").addClass("form-control")
+		$("select").addClass("form-control")
+		
+	</script>
+</form>
+{% endblock content %}

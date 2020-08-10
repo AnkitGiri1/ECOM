@@ -1,0 +1,122 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+    <div class="shopping-cart">
+        <div class="px-4 px-lg-0">
+            <div class="pb-5">
+                <div class="container">
+                    <div class="row">
+                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                            <div class="table-responsive">
+                                <h1>
+                                    Products Offered By You
+                                </h1>
+                                <span style="float: right;margin: 20px;font-size:25px;padding: 5px;color: blue;"><a href={% url 'addproduct' %}>Add Product</a></span>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="p-2 px-3 text-uppercase">Product</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Price</div>
+                                            </th>
+                                            <!-- <th scope="col" class="border-0 bg-light" style="text-align:center">
+                                                <div class="py-2 text-uppercase">Quantity</div>
+                                            </th> -->
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Remove</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for product in products %}
+                                        <tr>
+                                            <th scope="row" class="border-0">
+                                                <div class="p-2"><img src="{{product.image.url }}" alt width="70" class="img-fluid rounded shadow-sm" />
+                                                    <div class="ml-3 d-inline-block align-middle">
+                                                        <h5 class="mb-0"><a href="#" class="text-dark d-inline-block align-middle">{{ product.name }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: {{ product.category}}</span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="border-0 align-middle"><strong>Rs. {{ product.price }}</strong></td>
+                                            <!-- <td class="border-0 align-middle" style="text-align: center;">
+                                                <strong>
+                                                    <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}">
+                                                        <span class="glyphicon">&#x2b;</span>
+                                                    </a>
+                                                    {{ cart.quantity }}
+                                                    <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}&min=1">
+                                                        <span class="glyphicon">&#x2d;</span>
+                                                    </a>
+                                                </strong>
+                                            </td> -->
+                                            <td class="border-0 align-middle">
+                                                <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}&min=all" class="text-dark"><i class="fa fa-trash"></i></a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                            <div class="table-responsive">
+                                <h1>
+                                    Your orders
+                                </h1>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="p-2 px-3 text-uppercase">Product</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">USER</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light" style="text-align:center">
+                                                <div class="py-2 text-uppercase">Quantity</div>
+                                            </th>
+                                            <th scope="col" class="border-0 bg-light">
+                                                <div class="py-2 text-uppercase">Address</div>
+                                            </th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for order in orders %}
+                                        <tr>
+                                            <th scope="row" class="border-0">
+                                                <div class="p-2"><img src="{{order.product_id.image.url }}" alt width="70" class="img-fluid rounded shadow-sm" />
+                                                    <div class="ml-3 d-inline-block align-middle">
+                                                        <h5 class="mb-0"><a href="#" class="text-dark d-inline-block align-middle">{{ order.product_id.name }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: {{ order.product_id.category}}</span>
+                                                    </div>
+                                                </div>
+                                            </th>
+                                            <td class="border-0 align-middle"><strong>{{ order.order_id.user_id.first_name }} {{ order.order_id.user_id.last_name }}</strong></td>
+                                            <td class="border-0 align-middle" style="text-align: center;">
+                                                <strong>
+                                                    <!-- <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}">
+                                                        <span class="glyphicon">&#x2b;</span>
+                                                    </a> -->
+                                                    {{ order.quantity }}
+                                                    <!-- <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}&min=1">
+                                                        <span class="glyphicon">&#x2d;</span>
+                                                    </a> -->
+                                                </strong>
+                                            </td>
+                                            <td class="border-0 align-middle">
+                                                {{order.order_id.address}}
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock content %}

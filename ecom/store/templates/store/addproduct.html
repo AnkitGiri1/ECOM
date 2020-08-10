@@ -1,0 +1,24 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<div id="logreg-forms">
+	<form method="POST" action="" class="form-signin" enctype="multipart/form-data">
+		{% csrf_token %}
+		<h1 class="h3 mb-3 font-weight-normal" style="text-align: center">Add Product</h1>
+		<div class="inputcontainer">
+			{% for field in form %}
+				{{ field.label }}
+				{{ field }}
+				{{ field.errors}}
+			{% endfor %}
+		</div>	
+		<button class="btn btn-success btn-block" type="submit"><i class="fas fa-sign-in-alt"></i>Add Product</button>
+		
+		</form>
+		<script >
+			$("div input").addClass("form-control")
+
+		</script>
+
+</div>
+{% endblock content %}

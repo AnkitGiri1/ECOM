@@ -1,0 +1,276 @@
+:root{
+    --km-primary:#0fb59f;
+    --km-secondary:#ffae02;
+    --km-bg:#f5f5f5;
+    --km-black:#222222
+}
+#km-header :focus{
+    outline:0
+}
+#km-header .navbar{
+    display:flex;
+    flex-flow:column
+}
+#km-header .navbar .km-navbar-brand{
+    padding:20px 0;
+    width:100%;
+    background-color:#fff
+}
+#km-header .navbar .km-navbar-brand .navbar-toggler{
+    padding:0;
+    color:var(--km-primary)
+}
+#km-header .navbar .km-navbar-brand .container,#km-header .navbar .km-navbar-menu .navbar-collapse{
+    position:relative
+}
+#km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container{
+    position:absolute;
+    right:0;
+    top:20%
+}
+#km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container a{
+    font-size:16px;
+    font-style:normal;
+    font-stretch:normal;
+    line-height:normal;
+    letter-spacing:normal;
+    border:0px solid var(--km-primary);
+    padding:8px;
+    text-align:center;
+    display:inline-block;
+    box-sizing:border-box;
+    width:100px;
+    text-decoration:none;
+    font-weight:700;
+    transition:.3s
+}
+#km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container a:first-child,#km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container a:last-child:hover{
+    background-color:var(--km-primary);
+    color:#fff
+}
+#km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container a:first-child:hover,#km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container a:last-child{
+    color:var(--km-primary);
+    background-color:#fff
+}
+#km-header .navbar .km-navbar-menu{
+    background-color:var(--km-primary);
+    width:100%;
+    text-align:center
+}
+#km-header .navbar .km-navbar-menu .navbar-nav .nav-item{
+    padding:0 25px
+}
+#km-header .navbar .km-navbar-menu .navbar-nav .nav-item .nav-link{
+    text-transform:uppercase;
+    text-align:center;
+    color:#fff;
+    padding:18.5px 0 12.5px;
+    border-bottom:5px solid transparent;
+    transition:.3s;
+    font-weight:700;
+    letter-spacing:1px
+}
+#km-header .navbar .km-navbar-menu .navbar-nav .nav-item .nav-link:hover{
+    border-color:#fff
+}
+
+@media (max-width:595px){
+    .km-px-0{
+        padding-right:0;padding-left:0
+    }
+    #km-header .navbar .km-navbar-brand .navbar-brand{
+        max-width:40%;margin:0
+    }
+    #km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container{
+        right:5%
+    }
+    #km-header .navbar .km-navbar-brand .km-navbar-brand-btn-container a{
+        font-size:12px;width:60px;padding:5px 0
+    }
+    #km-header .navbar .km-navbar-menu .navbar-nav .km-cart,#km-header .navbar .km-navbar-menu .navbar-nav .km-cart span{
+        position:static
+    }
+}
+@media (max-width:992px){
+    .km-navbar-brand-btn-container{
+        display: none;
+    }
+    
+}
+@media (min-width:992px){
+    .hide_small{
+        display: none;
+    }
+    #km-header .navbar .km-navbar-menu .navbar-nav .km-cart{
+        position:absolute;
+        right:0;
+        top:0;
+        height:100%
+    }
+    #km-header .navbar .km-navbar-menu .navbar-nav .km-cart .nav-link{
+        position:relative;
+        padding-top:8px
+    }
+    #km-header .navbar .km-navbar-menu .navbar-nav .km-cart i{
+        position:relative;
+        top:5px
+    }
+    #km-header .navbar .km-navbar-menu .navbar-nav .km-cart span{
+        background-color:#000;
+        color:#fff;
+        position:absolute;
+        top:10px;
+        right:-15px;
+        border-radius:100%;
+        width:20px;
+        display:inline-block;
+        font-size:13px
+    }
+    
+}
+
+/* sign in FORM */
+#logreg-forms{
+    width:412px;
+    margin:10vh auto;
+    background-color:#f3f3f3;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
+  transition: all 0.3s cubic-bezier(.25,.8,.25,1);
+}
+#logreg-forms form {
+    width: 100%;
+    max-width: 410px;
+    padding: 15px;
+    margin: auto;
+}
+#logreg-forms .form-control {
+    position: relative;
+    box-sizing: border-box;
+    height: auto;
+    padding: 10px;
+    font-size: 16px;
+}
+#logreg-forms .form-control:focus { z-index: 2; }
+#logreg-forms .form-signin input[type="email"] {
+    margin-bottom: -1px;
+    border-bottom-right-radius: 0;
+    border-bottom-left-radius: 0;
+}
+#logreg-forms .form-signin input[type="password"] {
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+#logreg-forms a{
+    display: block;
+    padding-top:10px;
+    color:lightseagreen;
+}
+#logreg-form .lines{
+    width:200px;
+    border:1px solid red;
+}
+
+
+#logreg-forms button[type="submit"]{ margin-top:10px; }
+
+#logreg-forms .facebook-btn{  background-color:#3C589C; }
+
+#logreg-forms .google-btn{ background-color: #DF4B3B; }
+
+
+#logreg-forms .form-signup .social-btn{ width:210px; }
+
+#logreg-forms .form-signup input { margin-bottom: 2px;}
+
+.form-signup .social-login{
+    width:210px !important;
+    margin: 0 auto;
+}
+
+/* Mobile */
+
+@media screen and (max-width:500px){
+    #logreg-forms{
+        width:300px;
+    }
+    
+    #logreg-forms  .social-login{
+        width:200px;
+        margin:0 auto;
+        margin-bottom: 10px;
+    }
+    #logreg-forms  .social-btn{
+        font-size: 1.3rem;
+        font-weight: 100;
+        color:white;
+        width:200px;
+        height: 56px;
+        
+    }
+    #logreg-forms .social-btn:nth-child(1){
+        margin-bottom: 5px;
+    }
+    #logreg-forms .social-btn span{
+        display: none;
+    }
+    #logreg-forms  .facebook-btn:after{
+        content:'Facebook';
+    }
+  
+    #logreg-forms  .google-btn:after{
+        content:'Google+';
+    }
+    
+}
+
+@media screen and (max-height: 450px) {
+    .sidenav {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main{
+        margin-left: 40%; 
+    }
+
+    .sidenav{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.login-main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.login-main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}

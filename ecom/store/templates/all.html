@@ -1,0 +1,18 @@
+<div class="box-element">
+		<a  class="btn btn-outline-dark" href="{% url 'cart' %}" style="float:right">&#x2190; Back to Cart</a>
+		{% if orderplaced %}
+			<span>Your Order has been placed</span>
+		{% endif %}
+		<h3>Order Summary</h3>
+		{% for order in orders %}
+			{{ order.date }}
+			{% for item in order.items %}
+			<div class="cart-row">
+				<div><img class="row-image" height="50px" width="100px"src="{{ item.product_id.image.url }}"></div>
+				<div><p>{{  item.product_id.name }}</p></div>
+				<div><p>{{ item.product_id.price }}</p></div>
+				<div><p>x{{ item.quantity }}</p></div>
+			</div>
+			{% endfor %}
+		{% endfor %}
+	</div>

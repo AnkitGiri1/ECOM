@@ -1,0 +1,54 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+    <main class="page product-page">
+        <section class="clean-block clean-product dark">
+            <div class="container">
+                <div class="block-heading">
+                    <h2 class="text-info">Product Page</h2>
+                </div>
+                    {% for product in products %}
+                    {% if not forloop.counter|divisibleby:2 %}
+                    <div class="gift row gift--double no-border">
+                    {% endif %}
+                        <div class="shadow col-12 col-sm-6" style="text-align: center;">
+                            <div class="gift__img col-12"><img src="{{ product.image.url }}" height="250px" width="250px"/>
+                                <!-- <div class="gift__rating"><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star"></i><i class="fa fa-star fa-star-half-o"></i><i class="fa fa-star fa-star-o"></i><span class="gift__rating-number">921</span></div> -->
+                            </div>
+                            <div class="gift__info col-12">
+                                <h4 class="gift__name">{{ product.name}}</h4>
+                                <div class="gift__bottom row">
+                                    <div class="gift__price-wrap col-12">
+                                        <div class="gift__normal-price"><span>from {{ product.seller.user }}</span></div>
+                                        <div class="gift__today-price"><span class="gift__data">Rs. {{product.price}}</span></div>
+                                    </div>
+                                {% if not product.incart %}
+                                <div class="gift__cta-wrap col-12" style="margin-bottom: 20px;">
+                                    <a class="btn btn-primary" type="button" href="{% url 'cart'%}add/?product_id={{product.product_id}}&next=/product">
+                                        Add to Cart
+                                    </a>
+                                </div>
+                                {% endif %}
+                                {% if product.incart %}
+                                <div class="gift__cta-wrap col-12" style="margin-bottom: 20px;">
+                                    <a class="btn btn-success" type="button" href="{% url 'cart'%}">
+                                        Go to Cart
+                                    </a>
+                                    <a class="btn btn-danger" type="button" href="{% url 'cart'%}add/?product_id={{product.product_id}}&min=all&next=/product">
+                                        Remove from Cart
+                                    </a>
+                                </div>
+                                {% endif %}
+                                   
+                            </div>
+                        </div>
+                    </div>
+                    {% if forloop.counter|divisibleby:2 %}
+                    </div>
+                    {% endif %}
+                    {% endfor %}
+            </div>
+        </section>
+    </main>
+{% endblock content %}

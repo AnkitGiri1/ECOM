@@ -1,0 +1,111 @@
+{% extends 'store/main.html' %}
+{% load static %}
+{% block content %}
+{% if carts %}
+<div class="shopping-cart">
+    <div class="px-4 px-lg-0">
+        <div class="pb-5">
+            <div class="container">
+                <div class="row">
+                    <div class="col-lg-12 p-5 bg-white rounded shadow-sm mb-5">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="p-2 px-3 text-uppercase">Product</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Price</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light" style="text-align:center">
+                                            <div class="py-2 text-uppercase">Quantity</div>
+                                        </th>
+                                        <th scope="col" class="border-0 bg-light">
+                                            <div class="py-2 text-uppercase">Remove</div>
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+									{% for cart in carts %}
+                                    <tr>
+                                        <th scope="row" class="border-0">
+                                            <div class="p-2"><img src="{{ cart.product_id.image.url }}" alt width="70" class="img-fluid rounded shadow-sm" />
+                                                <div class="ml-3 d-inline-block align-middle">
+                                                    <h5 class="mb-0"><a href="#" class="text-dark d-inline-block align-middle">{{ cart.product_id.name }}</a></h5><span class="text-muted font-weight-normal font-italic d-block">Category: {{ cart.product_id.category}}</span>
+                                                </div>
+                                            </div>
+                                        </th>
+                                        <td class="border-0 align-middle"><strong>Rs. {{ cart.product_id.price }}</strong></td>
+                                        <td class="border-0 align-middle" style="text-align: center;">
+                                            <strong>
+                                                <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}">
+                                                    <span class="glyphicon">&#x2b;</span>
+                                                </a>
+                                                {{ cart.quantity }}
+                                                <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}&min=1">
+                                                    <span class="glyphicon">&#x2d;</span>
+                                                 </a>
+                                            </strong>
+                                        </td>
+                                        <td class="border-0 align-middle">
+                                            <a href="{% url 'cart'%}add/?product_id={{cart.product_id.product_id}}&min=all" class="text-dark"><i class="fa fa-trash"></i></a>
+                                        </td>
+									</tr>
+									{% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                <div class="row py-5 p-4 bg-white rounded shadow-sm">
+                    <div class="col-lg-6">
+                        <form method="POST" action="{% url 'orders'%}">
+                            {% csrf_token %}
+                            <div class="form-group"> <!-- Street 1 -->
+                                <label for="add1" class="control-label">Street Address 1</label>
+                                {{ form.add1 }}    
+                            </div>					
+                                                    
+                            <div class="form-group"> <!-- Street 2 -->
+                                <label for="add2" class="control-label">Street Address 2</label>
+                                {{ form.add2 }}
+                            </div>	
+                        
+                            <div class="form-group"> <!-- City-->
+                                <label for="city" class="control-label">City</label>
+                                {{ form.city }}
+                            </div>									
+                                                    
+                            <div class="form-group"> <!-- State Button -->
+                                <label for="state" class="control-label">State</label>
+                                {{form.state}}					
+                            </div>
+                            
+                            <div class="form-group"> <!-- Zip Code-->
+                                <label for="zipcode" class="control-label">Zip Code</label>
+                               {{form.zipcode}}
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="bg-light rounded-pill px-4 py-3 text-uppercase font-weight-bold">Order summary </div>
+                            <div class="p-4">
+                                <p class="font-italic mb-4">Shipping and additional costs are calculated based on values you have entered.</p>
+                                <ul class="list-unstyled mb-4">
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Order Subtotal </strong><strong>Rs. {{bill.total}}</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Shipping and handling</strong><strong>Rs. {{bill.shipping }}</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Tax</strong><strong>Rs. {{bill.tax}}</strong></li>
+                                    <li class="d-flex justify-content-between py-3 border-bottom"><strong class="text-muted">Total</strong>
+                                        <h5 class="font-weight-bold">Rs. {{ bill.gtotal }}</h5>
+                                    </li>
+                                </ul><button class="btn btn-dark rounded-pill py-2 btn-block">Procceed to checkout</button></div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endif %}
+{% endblock content %}
