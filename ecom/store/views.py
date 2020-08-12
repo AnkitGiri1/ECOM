@@ -14,16 +14,25 @@ def addproduct(request):
 			form.save(request)
 			return HttpResponseRedirect('/seller_dashboard')
 		else:
-			is_seller=seller.objects.filter(user=request.user)
+			try:
+				is_seller=seller.objects.filter(user=request.user)
+			except:
+				is_seller=None
 			context={'form':form,'seller':is_seller}
 			return render(request,'store/addproduct.html',context)
 	form=addproductform()
-	is_seller=seller.objects.filter(user=request.user)
+	try:
+		is_seller=seller.objects.filter(user=request.user)
+	except:
+		is_seller=None
 	context={'form':form,'seller':is_seller}
 	return render(request,'store/addproduct.html',context)
 
 def sellerdashboard(request):
-	is_seller=seller.objects.filter(user=request.user)
+	try:
+		is_seller=seller.objects.filter(user=request.user)
+	except:
+		is_seller=None
 	products=product.objects.filter(seller=is_seller[0])
 	orders=order_items.objects.filter(product_id__seller=is_seller[0])
 	context={'products':products,'orders':orders,'seller':is_seller}
@@ -58,7 +67,10 @@ def usersignup(request):
 	return render(request,'store/signup.html',context)
 
 def index(request):
-	is_seller=seller.objects.filter(user=request.user)
+	try:
+		is_seller=seller.objects.filter(user=request.user)
+	except:
+		is_seller=None
 	context={'seller':is_seller}
 	return render(request,'store/index.html',context)
 
@@ -70,7 +82,10 @@ def productview(request):
 		carts_l=list(carts_l)
 		for product1 in products:
 			product1.incart=product1.product_id in carts_l
+	try:
 		is_seller=seller.objects.filter(user=request.user)
+	except:
+		is_seller=None
 	context={'products':products,'seller':is_seller}
 	return render(request,'store/product.html',context)
 
@@ -90,7 +105,10 @@ def cartview(request):
 		total+=cart1.product_id.price*cart1.quantity
 	g_total=total+shipping+tax
 	bill={'total':total,'tax':tax,'shipping':shipping,'gtotal':g_total}
-	is_seller=seller.objects.filter(user=request.user)
+	try:
+		is_seller=seller.objects.filter(user=request.user)
+	except:
+		is_seller=None
 	context={'carts':carts,'bill':bill,'form':form,'seller':is_seller}
 	return render(request,'store/cart.html',context)
 
@@ -138,7 +156,10 @@ def ordersview(request):
 		orders=order.objects.filter(user_id=request.user)
 		for order1 in orders:
 			order1.items=order_items.objects.filter(order_id=order1)
-		is_seller=seller.objects.filter(user=request.user)
+		try:
+			is_seller=seller.objects.filter(user=request.user)
+		except:
+			is_seller=None
 		context={'orders':orders,'orderplaced':orderplaced,'seller':is_seller}
 		return render(request,'store/checkout.html',context)
 	orderplaced=True
@@ -157,7 +178,10 @@ def ordersview(request):
 	# orders=order.objects.filter(user_id=request.user)
 	for order1 in orders:
 		order1.items=order_items.objects.filter(order_id=order1)
-	is_seller=seller.objects.filter(user=request.user)
+	try:
+		is_seller=seller.objects.filter(user=request.user)
+	except:
+		is_seller=None
 	context={'orders':orders,'orderplaced':orderplaced,'seller':is_seller}
 	return render(request,'store/checkout.html',context)
 
